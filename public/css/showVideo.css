@@ -1,0 +1,83 @@
+.container{
+   display: flex;
+   flex-direction: row;
+   margin-top: 10vh;
+  
+}
+
+#my-video{
+    width: 59vw;
+    height: 60vh;
+    margin: 2vw;
+    margin-top: 13vh;
+}
+
+.details-container{
+    position: relative;
+    width: 35vw;
+    margin-top: 13vh;
+    display: flex;
+    flex-direction: column;
+    gap: 2vh;
+}
+
+.video-header{
+    display: flex;
+}
+
+.more{
+    display: flex;
+}
+
+.time-created{
+    position: relative;
+    top: 1vh;
+    left: 7vw;
+    height: fit-content;
+    color: #9cc0f4;
+}
+
+.download-video-original{
+    position: absolute;
+    bottom: 7vh;
+    border: 2px solid #fff;
+    padding: 1vw;
+    border-radius: 8px;
+    background: linear-gradient(to right bottom, hsl(154, 97%, 62%), hsl(225, 97%, 62%));
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    background-clip: text;
+   -webkit-text-fill-color:transparent;
+}
+
+.made-for-display{
+    font-size: 12px;
+    color: #b6b3bf;
+
+}
+
+.project-number-display{
+    position: relative;
+    font-size: 10px;
+    top: 2px;
+    margin-left: 2vw;
+    color: #b6b3bf;
+}
+
+.display-title{
+    font-size: 17px;
+    color: #1a1a1a;
+    width: 20vw;
+    text-overflow: ellipsis;
+    padding-bottom: 1vh;
+}
+
+.display-description{
+    color: #b6b3bf;    
+    font-size: 12px;
+    text-overflow: ellipsis;
+    max-height: 40vh;
+    -webkit-line-clamp: 6; /* number of lines to show */
+    -webkit-box-orient: vertical;
+}
+
