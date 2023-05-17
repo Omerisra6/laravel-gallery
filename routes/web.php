@@ -25,6 +25,6 @@ Route::view( '/addVideo', 'uploadVideo' );
 
 Route::get( '/display/{id}', [ VideoController::class, 'show' ] )->name( 'display_video' );
 
-Route::post( '/videos', [ VideoController::class, 'storeVideos' ] )->name( 'store_video' );
+Route::post( '/video', [ VideoController::class, 'storeVideos' ] )->name( 'store_video' );
 
 Route::post( '/import', [ VideoController::class, 'importVideos' ] )->name( 'import_videos' );
