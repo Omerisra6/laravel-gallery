@@ -24,7 +24,7 @@ class TempFileController extends Controller
             'filename' => $fileName
         ]);
 
-        return response( $folder, 200 );
+        return response( [ 'folder' => $folder ], 200 );
     }
 
     public function delete(  $folder )

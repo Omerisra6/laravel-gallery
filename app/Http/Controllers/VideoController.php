@@ -51,7 +51,7 @@ class VideoController extends Controller
             return response( $errors, 400 );
         }
         
-        return response( __( 'All videos uploaded' ), 200 );
+        return response( [ 'message' => __( 'All videos uploaded' ) ] , 200 );
     }
 
     /**
@@ -131,7 +131,7 @@ class VideoController extends Controller
             return response( $errors, 400 );
         }
 
-        return response( 'All videos uploaded', 200 );
+        return response( [ 'message' => 'All videos uploaded' ], 200 );
     }
 
 
