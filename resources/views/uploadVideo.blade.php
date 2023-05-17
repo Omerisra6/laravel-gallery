@@ -6,11 +6,7 @@
 
   
 @section( 'content' )       
-    <div>
-        <div class="loading-container invisible">
-        <div class="lds-roller loading-upload"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
-    </div>
-    
+    <x-loader></x-loader>
     <form class="store-videos-form" action="{{ route( 'store_video' ) }}" method="post">
 
         <table class="upload-video-container">
@@ -79,17 +75,15 @@
     
             <button class="add-row" onclick="addRow()">Add Row</button>
 
-            
         </div>
 
     </form>
-
     
     <script src="https://unpkg.com/filepond@^4/dist/filepond.js"></script>
 @endsection
 
 @section( 'scripts' )
-    <script>
+    <script defer>
         // Get a reference to the file input element
         const inputElement = document.querySelectorAll('input[type="file"]');
 
@@ -132,5 +126,4 @@
 
     <script src="{{ asset( 'js/helpers.js' ) }}"></script>
     <script type="text/javascript" src="{{ asset('js/uploadVideo.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/header.js') }}"></script>
 @endsection

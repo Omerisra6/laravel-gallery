@@ -95,6 +95,11 @@ class VideoController extends Controller
     public function search( $value )
     {
         $videos = Video::where( 'key_words', 'like', '%'.$value.'%' )
+        ->orWhere( 'description', 'LIKE', '%'.$value.'%' )
+        ->orWhere( 'resolution', 'LIKE', '%'.$value.'%' )
+        ->orWhere( 'project_number', 'LIKE', '%'.$value.'%' )
+        ->orWhere( 'ratio', 'LIKE', '%'.$value.'%' )
+        ->orWhere( 'title', 'LIKE', '%'.$value.'%' )
         ->orderBy( 'created_at' ,'DESC' )
         ->latest()
         ->paginate( 12 );
