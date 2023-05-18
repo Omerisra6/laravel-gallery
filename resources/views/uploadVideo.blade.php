@@ -82,48 +82,10 @@
     <script src="https://unpkg.com/filepond@^4/dist/filepond.js"></script>
 @endsection
 
+@section( 'after-content' )
+    <x-loader></x-loader>
+@endsection
+
 @section( 'scripts' )
-    <script defer>
-        // Get a reference to the file input element
-        const inputElement = document.querySelectorAll('input[type="file"]');
-
-        // Create a FilePond instance
-        Array.from(inputElement).forEach(inputElement => {
-
-            // create a FilePond instance at the input element location
-            const pond = FilePond.create(inputElement);
-
-            pond.setOptions({
-            server:{
-
-                url : '/api/upload',
-                headers : {
-                    'X-CSRF-TOKEN' : '{{ csrf_token() }}'
-                },
-
-                remove: (source, load, error) => {
-                    // Should somehow send `source` to server so server can remove the file with this source
-                    const remove = fetch ( `/api/remove/${ source }` ,{
-                        method: 'GET',
-                        headers: {                
-                            "X-CSRF-TOKEN": '{{ csrf_token() }}',
-                            },
-                        })
-
-
-                        // Should call the load method when done, no parameters required
-                        load();
-                    },
-                }
-            });
-
-        })
-
-       
-        
-
-    </script>
-
-    <script src="{{ asset( 'js/helpers.js' ) }}"></script>
-    <script type="text/javascript" src="{{ asset('js/uploadVideo.js') }}"></script>
+    <script type="module" src="{{ asset('js/uploadVideo.js') }}" ></script>
 @endsection

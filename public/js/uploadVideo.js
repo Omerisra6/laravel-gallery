@@ -14,8 +14,14 @@ const videosTable        = _('.table-body')
 const storeVideosForm    = _( '.store-videos-form' )
 
 
-const videos = []
+createFirstFilepond()
+attachDefaultListeners()
 
+function createFirstFilepond()
+{
+    const filePondInput = storeVideosForm.querySelector( 'input[type="file"]' )
+    createFilePond( filePondInput )
+}
 
 let rowCount = 1
 
