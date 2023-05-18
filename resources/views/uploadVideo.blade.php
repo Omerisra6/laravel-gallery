@@ -6,7 +6,6 @@
 
   
 @section( 'content' )       
-    <x-loader></x-loader>
     <form class="store-videos-form" action="{{ route( 'store_video' ) }}" method="post">
 
         <table class="upload-video-container">
@@ -21,7 +20,7 @@
                     <th class="file-th">File</th>
                 </tr>
             </thead>
-            <tbody class="table-body">
+            <tbody class="videos-table-body">
 
                 <tr class="row visible-row" data-row="1">
                     <td class="count">
@@ -33,29 +32,32 @@
                         1
                     </td>
                     <td> 
+                        <div class="error" name="errors-videos.0.title"></div>
                         <input  type="text" name="videos[0][title]" class="title-input upload-input" autocomplete="off" placeholder="Give me a title"  focus="none" required> 
                     </td>
 
                     <td> 
+                    <div class="error" name="errors-videos.0.project_number"></div>
                         <input  type="text" name="videos[0][project_number]" autocomplete="off" class="project-number-input upload-input" placeholder="Give me project number"  required>
                     </td>
 
                     <td>
+                        <div class="error" name="errors-videos.0.description"></div>
                         <input  type="text" name="videos[0][description]"  autocomplete="off" class="description-input textra" placeholder="Give me a descripion (optional)"></input>
-
                     </td>
 
                     <td>            
+                        <div class="error" name="errors-videos.0.made_for"></div>
                         <input  type="text" name="videos[0][made_for]" autocomplete="off" class="made-for-input upload-input"  placeholder="Give me a client name" required>
                     </td>
 
                     <td>
-                        
+                        <div class="error" name="errors-videos.0.key_words"></div>
                         <input  type="text" name="videos[0][key_words]" autocomplete="off" class="key-words-input upload-input" placeholder="Give me a key word" required><br/>
-                        
                     </td>
 
                     <td>
+                        <div class="error" name="errors-videos.0.video"></div>
                         <div class="filepond-container">
                             <input class="ad-file-input" type="file" accept="video/mp4,video/x-m4v,video/*, video/mov" name="video" required>
                         </div>
@@ -73,7 +75,7 @@
 
             <button class="sumbit-upload-form theme-color" >Upload Ad</button>
     
-            <button class="add-row" onclick="addRow()">Add Row</button>
+            <button class="add-row">Add Row</button>
 
         </div>
 
