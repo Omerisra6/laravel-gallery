@@ -37,18 +37,20 @@ class VideoController extends Controller
     public function storeVideos( StoreVideoRequest $request )
     {
         $request->validated();
-
-        $errors = collect( $request->videos )->map( function( $video ) {
-
-            $this->storeVideo( $video ) ? 
-            null :
-            [ $video[ 'title' ] => __( 'Video upload failed' ) ] ;
+        $errors = collect( $request->videos )->mapWithKeys( function( $video, $index ) {
+        
+            if( $this->storeVideo( $video ) )
+            {
+                return [ $index => null ];
+            }
+            
+            return  [  'videos.' . $index . '.video' => [ __( 'upload file again' ) ] ];
         })
         ->filter();   
 
-        if ( $errors->count() > 0 ) 
+        if ( $errors->isNotEmpty() ) 
         {
-            return response( $errors, 400 );
+            return response( [ 'errors' => $errors ], 400 );
         }
         
         return response( [ 'message' => __( 'All videos uploaded' ) ] , 200 );
