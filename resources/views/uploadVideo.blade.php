@@ -24,11 +24,6 @@
 
                 <tr class="row visible-row" data-row="1">
                     <td class="count">
-                        <div class="copy-container" onclick="copyRow(event)">
-                            <i class="fa fa-copy theme-color"></i>                        
-                        </div>
-
-
                         1
                     </td>
                     <td> 
@@ -71,11 +66,11 @@
 
         <div class="page-bottom">
 
-            <button class="remove-row" onclick="removeRow()">Remove Row</i></button>
+            <button class="remove-row-button">Remove Row</i></button>
 
             <button class="sumbit-upload-form theme-color" >Upload Ad</button>
     
-            <button class="add-row">Add Row</button>
+            <button class="add-row-button">Add Row</button>
 
         </div>
 
@@ -89,5 +84,5 @@
 @endsection
 
 @section( 'scripts' )
-    <script type="module" src="{{ asset('js/uploadVideo.js') }}" ></script>
+    <script type="module" src="{{ asset('js/pages/uploadVideo.js') }}" ></script>
 @endsection

@@ -28,6 +28,6 @@ Route::get( '/video/{id}', [ VideoController::class, 'downloadOriginal' ] );
 Route::get( '/reduced_video/{id}', [ VideoController::class, 'downloadReduced' ] );
 
 //TempFile Routes
-Route::post( '/upload', [ TempFileController::class, 'store' ] )->name( 'upload_temp' );
+Route::post( '/temp', [ TempFileController::class, 'store' ] )->name( 'upload_temp' );
 
-Route::delete( '/delete/{folder}', [ TempFileController::class , 'delete' ] )->name( 'delete_temp' );
+Route::delete( '/temp', [ TempFileController::class , 'delete' ] )->name( 'delete_temp' );
