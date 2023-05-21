@@ -96,6 +96,8 @@ class VideoController extends Controller
     */
     public function search( $value )
     {
+        $videosPerPage = 8;
+
         $videos = Video::where( 'key_words', 'like', '%'.$value.'%' )
         ->orWhere( 'description', 'LIKE', '%'.$value.'%' )
         ->orWhere( 'resolution', 'LIKE', '%'.$value.'%' )
@@ -104,9 +106,9 @@ class VideoController extends Controller
         ->orWhere( 'title', 'LIKE', '%'.$value.'%' )
         ->orderBy( 'created_at' ,'DESC' )
         ->latest()
-        ->paginate( 12 );
+        ->paginate( $videosPerPage );
             
-        return view('welcome')->with( 'videos', $videos );
+        return view('home')->with( 'videos', $videos );
     }
 
     /**
