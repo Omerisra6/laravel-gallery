@@ -23,7 +23,6 @@ function addDownloadButtonsListeners()
     const videoDownloadButtons = _All( '.download-video-button')
 
     Array.from( videoDownloadButtons ).forEach( downloadButton => {
-
        downloadButton.addEventListener( 'click', ( e ) => showDownloadPop( e ) )
     })
 }

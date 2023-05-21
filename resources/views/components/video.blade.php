@@ -19,7 +19,7 @@
 
     <div class="video-bottom-container">
         <h3 class="video-made-for">{{$video->made_for}}</h3>
-        <i class="fa fa-download theme-color download-video-icon" data-vid="{{$video->id}}" onclick="showDownloadPop(event)"></i>
+        <i class="fa fa-download theme-color download-video-icon download-video-button" data-vid="{{$video->id}}"></i>
     </div>     
     
 </div>

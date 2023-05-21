@@ -1,5 +1,6 @@
 export function setUpPagination( callback )
 {
+    callback()
     $('ul.pagination').hide();
     $('.scrolling-pagination').jscroll({
         autoTrigger: true,
