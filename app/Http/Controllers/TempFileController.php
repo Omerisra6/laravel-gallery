@@ -24,14 +24,20 @@ class TempFileController extends Controller
             'filename' => $fileName
         ]);
 
-        return response(  $folder, 200 );
+        return response( $folder, 200 );
     }
 
-    public function delete(  $folder )
+    public function delete(  Request $request )
     {
-        $temp = TempFile::findOrFail( $folder, 'folder' );
+        $folder = $request->getContent();
+        $temp = TempFile::where( 'folder', $folder )->first();
+        
+        $videosPath         =  public_path( '\\videos' );
+        $tmpVideoFolderPath =  $videosPath. '\\tmp\\' .$folder;
+        unlink(  $tmpVideoFolderPath . '\\' . $temp->filename );
+        rmdir(  $tmpVideoFolderPath );
 
-        unlink(  public_path( 'tmp/' .$folder . '/' . $temp->filename ) );
-        rmdir(  public_path( 'tmp/' .$folder ) );
+        $temp->delete();
+        return response( $folder, 200 );
     }
 }
