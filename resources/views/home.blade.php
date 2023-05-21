@@ -38,24 +38,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jscroll/2.4.1/jquery.jscroll.min.js"></script>
-
-    <script type="text/javascript">
-        $('ul.pagination').hide();
-        $(function() {
-            $('.scrolling-pagination').jscroll({
-                autoTrigger: true,
-                padding: 0,
-                nextSelector: '.pagination li.active + li a',
-                contentSelector: 'div.scrolling-pagination',
-                loadingHtml: '<div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>',
-                callback: function() {
-                    $('ul.pagination').remove();    
-                }
-            });
-        });
-    
-    </script>
-    <script type="text/javascript" src="{{ asset( 'js/home.js' ) }}" defer></script>
+    <script type="module" src="{{ asset( 'js/pages/home.js' ) }}" defer></script>
 @endsection
 
 
