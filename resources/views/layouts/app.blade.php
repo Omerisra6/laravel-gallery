@@ -35,8 +35,7 @@
     </main>
 
     @yield('after-content')
-    <script type="text/javascript" src="{{ asset('js/helpers.js') }}" defer></script>
-    <script type="text/javascript" src="{{ asset('js/header.js') }}" defer></script>
+    <script type="text/javascript" src="{{ asset('js/components/header.js') }}" defer></script>
     @yield('scripts')
 </body>
 
