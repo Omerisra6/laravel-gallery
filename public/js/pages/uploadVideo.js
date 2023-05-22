@@ -52,7 +52,7 @@ async function uploadVideo()
 function addRow( e )
 {
     e.preventDefault()
-    const rowIndex = videosTableBody.children.length;
+    const rowIndex = videosTableBody.children.length 
     const videoRowElement = UploadVideoRow( rowIndex )
     videosTableBody.appendChild( videoRowElement )
 }
@@ -60,9 +60,9 @@ function addRow( e )
 function removeRow( e ) 
 {
     e.preventDefault()
-    const index = videosTableBody.childElementCount
+    const index = videosTableBody.children.length
 
-    if (index == 1) 
+    if (index === 1) 
     {
         return
     }
