@@ -35,9 +35,8 @@ export function renderErrors( data, form )
 
     //Render errors
     errorKeys.forEach( errorKey => {
-        console.log( errorKey );
-        const errorContainer =  form.querySelector( `errors-[name="${errorKey}"]` )
-        errors[ `${errorKey}` ].forEach( message => {
+        const errorContainer =  form.querySelector( `[name="errors-${errorKey}"]` )
+        errors[ errorKey ].forEach( message => {
             console.log( message );
             errorContainer.innerHTML = message
         })
