@@ -117,6 +117,10 @@
     color: #fff;
 }
 
+.play-icon-container > i{
+    font-size: var( --font-size-xl );
+}
+
 .image-overlay:hover > .play-icon-container{
     opacity: 1;
 }

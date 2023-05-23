@@ -71,3 +71,8 @@ body{
     height: 100%;
     padding: 0 2vw;
 }
+
+.link{
+    color: var( --theme-green-text );
+    border-bottom: 2px dotted var( --theme-green-text );
+}

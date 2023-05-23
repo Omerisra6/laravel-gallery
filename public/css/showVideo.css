@@ -5,11 +5,6 @@
     font-size: var( --font-size-md );
 }
 
-.link{
-    color: var( --theme-green-text );
-    border-bottom: 2px dotted var( --theme-green-text );
-}
-
 .show-video-container{
     height: 100%;
     width: 100%;
