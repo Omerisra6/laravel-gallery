@@ -6,8 +6,7 @@
     align-items: center;
     padding: 4vh 1vw;
     border-right: 2px solid var( --theme-light-bg );
-}   
-
+} 
 
 .nav-button{
     width: 5vw;
@@ -31,6 +30,63 @@
     cursor: pointer;
     position: relative;
     height: 60px;
+}
+
+.import-videos-container{
+    position: relative;
+}
+
+.drive-explanation{
+    z-index: 99;
+    font-size: var( --font-size-sm );
+    flex-direction: column;
+    position: absolute;
+    top: 5vw;   
+    left: 1vw;
+    width: 20vw;
+    padding: var( --padding-sm );
+    background-color: var( --white );
+    border-radius: 5px; 
+    display: none;
+}
+
+
+.drive-explanation:hover {
+    display: flex;
+}
+
+.import-videos-container:hover > .drive-explanation {
+    display: flex;
+}
+
+.drive-explanation::after{
+    position: absolute;
+    content: '';
+    clip-path: polygon(50% 0%, 25% 100%, 78% 100%);
+    padding: 0.5vh 2vw;
+    background-color: var( --white );
+    top: -0.5vh;
+    left: -1vw;
+    rotate: 90deg;
+}
+
+
+.drive-explanation::before{
+    position: absolute;
+    content: '';
+    width: 5vw;
+    height: 2vh;
+    top: -1.5vh;
+    left: 5vw;
+    visibility: none;
+}
+
+.explanation-title{
+    color: var( --theme-green-text );
+}
+
+.excel-sample-download{
+    width: fit-content;
 }
 
 @media ( max-width: 600px ){

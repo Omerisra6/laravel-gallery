@@ -41,50 +41,47 @@ class VideoImport implements OnEachRow, WithStartRow
             return;
         }
 
-        try{
-            $videosFolder = public_path( '/videos' );
-            $path = FileService::make()->findFileByName( $videosFolder, $this->names[ $i ] );
+        $videosFolder = public_path( '/videos' );
+        $path = FileService::make()->findFileByName( $videosFolder, $this->names[ $i ] );
 
-            if ( ! $path ) 
-            {
-                return;
-            }
-            
-            $path         = $this->adjustVideoPath( $path );
-            $videoService = VideoService::make( $path );
-            $resolution   = $videoService->resolution;
-            $ratio        = $videoService->ratio;
-            $duration     = $videoService->duration;
+        if ( ! $path ) 
+        {
+            return;
+        }
+        
+        $path         = $this->adjustVideoPath( $path );
+        $videoService = VideoService::make( $path );
+        $resolution   = $videoService->resolution;
+        $ratio        = $videoService->ratio;
+        $duration     = $videoService->duration;
 
-            $folderPath = FileService::make()->getFolderPath( $path );
-            $imagePath  = $folderPath . '/' . now()->timestamp . '-FrameAt1sec.png';
-            CaptureImage::dispatch( $path, $imagePath );
+        $folderPath = FileService::make()->getFolderPath( $path );
+        $imagePath  = $folderPath . '/' . now()->timestamp . '-FrameAt1sec.png';
+        CaptureImage::dispatch( $path, $imagePath );
 
-            $reducedPath = $folderPath . '/' . now()->timestamp . '-'.$this->names[ $i ];
-            $reducedPath = FileService::make()->replaceExtension( $reducedPath, 'mp4' );
-            ConvertVideoForStreaming::dispatch( $reducedPath, $path );
+        $reducedPath = $folderPath . '/' . now()->timestamp . '-'.$this->names[ $i ];
+        $reducedPath = FileService::make()->replaceExtension( $reducedPath, 'mp4' );
+        ConvertVideoForStreaming::dispatch( $reducedPath, $path );
 
 
-            $wordsArray = explode( ',', $keyWords );
-            array_push( $wordsArray, $resolution, $ratio, $videoName, $projectNumber, $projectName, $client, $dateCreated );
-            $keyWords = implode( ', ', $wordsArray );
+        $wordsArray = explode( ',', $keyWords );
+        array_push( $wordsArray, $resolution, $ratio, $videoName, $projectNumber, $projectName, $client, $dateCreated );
+        $keyWords = implode( ', ', $wordsArray );
 
-            Video::create( [
-                'description'    => '',
-                'title'          => $videoName,
-                'duration'       => $duration,
-                'key_words'      => $keyWords,
-                'original_video' => $path,
-                'reduced_video'  => $reducedPath,
-                'image_display'  => $imagePath,
-                'resolution'     => $resolution,
-                'made_for'       => $client,
-                'project_number' => strval( $projectNumber ),
-                'ratio'          => $ratio,
-            ]);
-        }catch( \Exception $e ){
-            dd( $e );
-        }       
+        Video::create( [
+            'description'    => '',
+            'title'          => $videoName,
+            'duration'       => $duration,
+            'key_words'      => $keyWords,
+            'original_video' => $path,
+            'reduced_video'  => $reducedPath,
+            'image_display'  => $imagePath,
+            'resolution'     => $resolution,
+            'made_for'       => $client,
+            'project_number' => strval( $projectNumber ),
+            'ratio'          => $ratio,
+        ]);
+       
     }
 
     private function adjustVideoPath( $path )

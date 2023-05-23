@@ -12,10 +12,20 @@
         <i class="fa-solid fa-upload"></i>
     </a>
 
-    <form class="import-videos-container nav-button" action="/import" method="POST" enctype="multipart/form-data">
+    <form class="import-videos-container import-videos-form nav-button" action="/import" method="POST" enctype="multipart/form-data">
         @csrf
-        <input type="file" name="file" accept="file/xlxs" class="invisible">
-        <button class="sumbit-excel invisible">Submit</button>
+        <input class="import-videos-input invisible" type="file" name="file" accept="file/xlxs">
         <i class="fa-brands fa-google-drive import-icon"></i>
+
+        <div class="drive-explanation">
+            <h4 class="explanation-title">Read before using</h4>
+            <span class="drive-explanation-text">
+                This method allows for synchronizing video details from Google Drive using an Excel file. 
+                </br>
+                It requires that the files in storage have the exact same name as the corresponding Google Drive files. 
+                </br>
+            </span>
+            <a href="{{asset('files/Gravity-Drive-Test.xlsx')}}" class="excel-sample-download link" download>Excel Sample</a>
+        </div>
     </form>
 </div>
