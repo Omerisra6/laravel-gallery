@@ -37,7 +37,6 @@ export function renderErrors( data, form )
     errorKeys.forEach( errorKey => {
         const errorContainer =  form.querySelector( `[name="errors-${errorKey}"]` )
         errors[ errorKey ].forEach( message => {
-            console.log( message );
             errorContainer.innerHTML = message
         })
     })
@@ -62,4 +61,12 @@ export async function fetchWrapper(url, method = "GET", headers = {}, body = nul
   
     const json = await response.json();
     return response.ok ? json : Promise.reject(json);
+}
+
+export function toggleOnSelect( elementsList, selectedElement, className )
+{
+    Array.from( elementsList ).forEach((element) => {
+        const isSelected = element === selectedElement;
+        element.classList.toggle(className, isSelected);
+    });
 }
