@@ -22,7 +22,7 @@
     <link href="{{ asset('css/index.css') }}" rel="stylesheet" type="text/css" >
     <link href="{{ asset('css/components/header.css') }}" rel="stylesheet" type="text/css" >
     <link href="{{ asset('css/components/navigation.css') }}" rel="stylesheet" type="text/css" >
-    <link rel="icon" href="{{ asset( 'images/logo.jpg' ) }}">
+    <link rel="icon" href="{{ asset( '/favicon.ico' ) }}">
     <script src="https://kit.fontawesome.com/c3b53fc9a9.js" crossorigin="anonymous"></script>
     @yield('styles')
     @yield( 'styles-over-index' )
