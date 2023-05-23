@@ -2,7 +2,7 @@ import { _, _All, appendExtraDataToArray, deleteErrors, fetchWrapper, renderErro
 import { createFilePond } from "../utils/filepond.js"
 import { UploadVideoRow } from "../view-components/UploadVideoRow.js"
 
-const sumbitForm      = _('.sumbit-upload-form')
+const sumbitForm      = _('.submit-upload-form')
 const loader          = _('.loading-container')
 const storeVideosForm = _( '.store-videos-form' )
 const videosTableBody = _( '.videos-table-body' )

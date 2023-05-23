@@ -1,0 +1,122 @@
+:root{
+    --video-width: 25vw;
+    --video-height: 30vh;
+}
+
+@media ( max-width: 600px ){
+    :root{
+        --video-width: 70vw;
+        --video-height: 25vh;
+    }
+}
+
+.video{ 
+    display: flex;
+    flex-direction: column;
+    margin: 5px 8px;
+    color: #1A1A1A;
+    width: var( --video-width);
+    height: var( --video-height );
+}
+
+.video-display{
+    cursor: pointer;
+    width: var( --video-width);
+    height: var( --video-height );
+    border-radius: 8px;
+    font-size: 10px;
+}
+
+.image-overlay{
+    position: absolute;
+    top: 0;
+    cursor: pointer;
+    background: rgba(0, 0, 0, 0.3);
+    display: flex;
+    border-radius: 8px;
+    flex-direction: column;
+    width: var( --video-width);
+    height: var( --video-height );
+    justify-content: space-between;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.image-overlay--blur {
+    backdrop-filter: blur(5px);
+}
+
+.overlay-top{
+    padding: var( --padding-md );
+}
+
+.overlay-bottom, .title-and-project-container, .ratio-and-download-container{
+    display: flex;
+    align-items: center;
+}
+
+.overlay-bottom{
+    justify-content: space-between;
+    padding: var( --padding-md );
+    font-size: var( --font-size-sm );
+    color: var( --theme-light-text );
+}
+
+.title-and-project-container{
+    flex-direction: column;
+    gap: 0.5vh;
+}
+
+.ratio-and-download-container{
+    gap: 1vw;
+}
+
+.video-made-for{
+    width: fit-content;
+    font-size: var( --font-size-sm );
+    color: var( --theme-light-text );
+    background-color: rgba(62, 62, 62, 0.2);
+    backdrop-filter: blur(3px);
+    padding: var( --padding-sm );
+    border-radius: var( --border-radius-default );
+}
+
+.video-project-number{
+    font-size: var( --font-size-sm );
+    text-decoration: underline;
+    color: var( --theme-grey-text );
+}
+
+.video-title{
+    font-size: var( --font-size-md );
+}
+
+.download-video-button{
+    padding: var( --padding-sm );
+    color: var( --theme-dark-text );
+    background-color: var( --theme-color );
+    border: none;
+    border-radius: var( --border-radius-default );
+    font-size: var( --font-size-sm );
+    font-weight: bold;
+    cursor: pointer;
+}
+
+
+.display-container{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.play-icon-container{
+    opacity: 0;
+    transition: transform 0.25s;
+    transition: opacity 0.35s;
+    align-self: center;
+    color: #fff;
+}
+
+.image-overlay:hover > .play-icon-container{
+    opacity: 1;
+}

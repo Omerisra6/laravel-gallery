@@ -1,0 +1,73 @@
+:root {
+    --theme-bg: #121218;
+    --theme-light-bg: #191b1f;
+    --theme-light-grey-bg: #2B2C30;
+    --theme-color: #84CD81;
+    --theme-dark-text: #191b1f;
+    --theme-dark-green-text: #426247;
+    --theme-green-text: #82AC84;
+    --theme-light-text: #E1E1E1;
+    --theme-grey-text: #AAA9AE;
+    --white: #ffffff;
+    --green: #1EA462;
+    --orange: #FEA873;
+
+    --font-size-xs: 0.7vw;
+    --font-size-sm: 1vw;
+    --font-size-md: 1.5vw;
+    --font-size-lg: 2vw;
+    --font-size-xl: 3vw;
+
+    --padding-sm: 1vh 1vw;
+    --padding-md: 2vh 1.5vw;
+
+    --border-radius-default: 8px;
+}
+
+@media (max-width: 600px) {
+    :root {
+        --font-size-xs: 0.4rem;
+        --font-size-sm: 0.6rem;
+        --font-size-md: 1rem;
+        --font-size-lg: 1.5rem;
+        --font-size-xl: 2rem;
+
+        --padding-sm: 0.4rem;
+        --padding-md: 1.3rem 0.7rem;
+    }
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    font-family: Nunito ;
+}
+
+.invisible{
+    display: none;
+}
+
+textarea:focus, input:focus{
+    outline: none;
+}
+
+
+body{
+    display: flex;
+    background-color: var( --theme-bg );
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.navigation-container{
+    width: 7%;
+    height: 100%;
+}
+
+.main{
+    width: 84%;
+    height: 100%;
+    padding: 0 2vw;
+}

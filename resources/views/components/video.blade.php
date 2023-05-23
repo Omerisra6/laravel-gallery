@@ -1,25 +1,32 @@
 <div class="video" data-vid="{{$video->id}}">
-
-    <a class="display-container"  href="/display/{{$video->id}}">
+    <div class="display-container">
         <img src="{{asset('videos'.$video->image_display)}}" alt="" class="video-display">
-        <h4 class="video-duration">{{$video->duration}}</h4>
         <div class="image-overlay">
-            <i class="fa fa-play"></i>
+
+            <div class="overlay-top">
+
+                <h3 class="video-made-for">{{$video->made_for}}</h3>
+
+            </div>
+
+            <a href="/display/{{$video->id}}" class="play-icon-container"><i class="fa fa-play"></i></a>
+
+            <div class="overlay-bottom">
+
+                <div class="title-and-project-container">
+                    
+                    <h4 class="video-project-number">{{$video->project_number}}</h4>
+                    <h2 class="video-title">{{$video->title}}</h2>
+
+                </div>
+
+                <div class="ratio-and-download-container">
+
+                    <h3 class="video-ratio">{{$video->ratio}}</h3>
+                    <a href="/api/reduced/{{$video->id}}" class="download-video-button">Download</a>
+
+                </div>
+            </div>
         </div>
-    </a>  
-
-    <div class="tite-and-time">
-        <h2 class="video-title">{{$video->title}}</h2>
-    </div>
-    <h4 class="video-project-number">project number: {{$video->project_number}}</h4>
-
-    <h6 class="video-time">{{substr($video->created_at, 0, -9);}}</h6>
-    <h6 class="video-ratio">{{$video->ratio}}</h3>
-
-
-    <div class="video-bottom-container">
-        <h3 class="video-made-for">{{$video->made_for}}</h3>
-        <i class="fa fa-download theme-color download-video-icon download-video-button" data-vid="{{$video->id}}"></i>
-    </div>     
-    
+    </div>  
 </div>

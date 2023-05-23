@@ -8,9 +8,9 @@ class HomeController extends Controller
 {
     public function show()
     {
-        $videosPerPage = 8;
+        $videosPerPage = 9;
         $videos = Video::latest()->paginate( $videosPerPage ); 
-    
+  
         return view('home')->with( 'videos', $videos );    
     }
 }

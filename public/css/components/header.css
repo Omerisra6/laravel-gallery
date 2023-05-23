@@ -1,0 +1,35 @@
+.header{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 10vh;
+    width: 100%;
+    padding: 4vh 1vw;
+    height: 4%;
+}
+
+.search-container{
+    background-color: var( --theme-light-bg );
+    display: flex;
+    height: 7vh;
+    border-radius: var( --border-radius-default );
+    padding-left: 1vw;
+}
+
+.search-ads{
+    cursor: pointer;
+    background-color: var( --theme-light-bg );
+    border: none;
+    border-radius: var( --border-radius-default );
+    color: var( --theme-light-text )
+}
+
+.input-search{
+    width: 40vw;
+    border-radius: var( --border-radius-default );
+    padding-left: 10px;
+    min-width: 100px;
+    border: none;
+    background-color: var( --theme-light-bg );
+    color: var( --theme-grey-text );
+}

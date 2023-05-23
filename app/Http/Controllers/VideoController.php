@@ -96,7 +96,7 @@ class VideoController extends Controller
     */
     public function search( $value )
     {
-        $videosPerPage = 8;
+        $videosPerPage = 9;
 
         $videos = Video::where( 'key_words', 'like', '%'.$value.'%' )
         ->orWhere( 'description', 'LIKE', '%'.$value.'%' )
