@@ -19,23 +19,26 @@
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
 
     <!-- Styles -->
-    <link href="{{ asset('css/header.css') }}" rel="stylesheet" type="text/css" >
+    <link href="{{ asset('css/index.css') }}" rel="stylesheet" type="text/css" >
+    <link href="{{ asset('css/components/header.css') }}" rel="stylesheet" type="text/css" >
+    <link href="{{ asset('css/components/navigation.css') }}" rel="stylesheet" type="text/css" >
     <link rel="icon" href="{{ asset( 'images/logo.jpg' ) }}">
-    <script src="https://kit.fontawesome.com/ea6d546e2a.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/c3b53fc9a9.js" crossorigin="anonymous"></script>
     @yield('styles')
     @yield( 'styles-over-index' )
 
 </head>
 <body>
     
-    <x-header></x-header>
-
+    <x-navigation></x-navigation>
     <main class="main">
+        <x-header></x-header>
         @yield('content')
     </main>
 
     @yield('after-content')
-    <script type="text/javascript" src="{{ asset('js/components/header.js') }}" defer></script>
+    <script type="module" src="{{ asset('js/components/header.js') }}" defer></script>
+    <script type="module" src="{{ asset('js/components/navigation.js') }}" defer></script>
     @yield('scripts')
 </body>
 
