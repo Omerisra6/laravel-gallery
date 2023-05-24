@@ -70,3 +70,19 @@ export function toggleOnSelect( elementsList, selectedElement, className )
         element.classList.toggle(className, isSelected);
     });
 }
+
+export function validateRequiredInputs( inputs ) 
+{
+    if ( inputs.includes( null ) ) 
+    {
+        return false
+    }
+
+    const emptyValue = inputs.find( ( input ) => ! input.value )
+    if ( !! emptyValue ) 
+    {
+        return false
+    }
+
+    return true
+}

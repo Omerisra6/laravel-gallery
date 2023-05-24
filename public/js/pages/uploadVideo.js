@@ -1,8 +1,8 @@
-import { _, _All, appendExtraDataToArray, deleteErrors, fetchWrapper, renderErrors } from "../utils/helpers.js"
+import { _, _All, appendExtraDataToArray, deleteErrors, fetchWrapper, renderErrors, validateRequiredInputs } from "../utils/helpers.js"
 import { createFilePond } from "../utils/filepond.js"
 import { UploadVideoRow } from "../view-components/UploadVideoRow.js"
 
-const sumbitForm      = _('.submit-upload-form')
+const submitForm      = _('.submit-upload-form')
 const loader          = _('.loading-container')
 const storeVideosForm = _( '.store-videos-form' )
 const videosTableBody = _( '.videos-table-body' )
@@ -15,7 +15,7 @@ function attachDefaultListeners()
 {    
     createFirstFilepond()
     
-    sumbitForm.addEventListener('click', async function( e ){
+    submitForm.addEventListener('click', async function( e ){
 
         e.preventDefault()
         await uploadVideo()
@@ -34,7 +34,13 @@ function createFirstFilepond()
 
 async function uploadVideo() 
 {    
-    const videosFormData = appendFilepondsToForm( storeVideosForm ) 
+    const fileDataInputs = getPondDataInputs()
+    if ( ! validateRequiredInputs( fileDataInputs ) ) 
+    {
+        return    
+    }
+
+    const videosFormData = appendFilepondsToForm( storeVideosForm, fileDataInputs ) 
     const requestHeaders = { "Accept": "application/json" }
 
     try {
@@ -70,14 +76,18 @@ function removeRow( e )
     videosTableBody.removeChild( videosTableBody.lastChild )
 }
 
-function appendFilepondsToForm( storeVideosForm )
+function appendFilepondsToForm( storeVideosForm, fileInputs  )
 {
     const videosFormData = new FormData( storeVideosForm )
-    const filePonds      = _All( '.filepond--data' )
-    const fileInputs     = [ ...filePonds ].map( ( filePond ) =>{
-        
-        return filePond.querySelector( 'input[name="video"]' );
-    }).filter( (value ) => !! value )
     
     return appendExtraDataToArray( videosFormData, 'videos', fileInputs )
+}
+
+function getPondDataInputs()
+{
+    const filePonds = _All( '.filepond--data' )
+    return Array.from( filePonds ).map( ( filePond ) =>{
+        
+        return filePond.querySelector( 'input[name="video"]' );
+    })
 }
