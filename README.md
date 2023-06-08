@@ -49,7 +49,7 @@
 
 ## How To Use
 
-To clone and run this application, you'll need [Git](https://git-scm.com), [PHP](https://www.php.net/) and [Docker](https://www.docker.com/) installed on your computer. 
+To clone and run this application, you'll need [Git](https://git-scm.com), [PHP](https://www.php.net/), [FFmpeg](https://ffmpeg.org) and [Composer](https://getcomposer.org/) installed on your computer. 
 From your command line:
 
 ```bash
@@ -59,11 +59,18 @@ $ git clone https://github.com/Omerisra6/login-system-php
 # Set Google Client API Key in .env
 GOOGLE_CLIENT_API_KEY=<YOUR_CLIENT_KEY>
     
-# Build Image
-docker build -t video-gallery-image .
+# Install dependencies
+composer install --optimize-autoloader --no-dev
 
-# Serve App
-docker run -p 80:80 video-gallery-image
+# Clear config cache
+php artisan config:cache
+
+# Run migrations
+php artisan migrate
+
+# Serve app
+php artisan serve
+
 ```
 
 ## Credits
