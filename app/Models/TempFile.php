@@ -17,10 +17,10 @@ class TempFile extends Model
         return 'tmp' . DIRECTORY_SEPARATOR . $this->folder .DIRECTORY_SEPARATOR . $this->filename;
     }
 
-    public function moveAndDelete( $newPath )
+    public function moveAndDelete($newPath)
     {
-        Storage::disk( 'backup' )->move( $this->path, $newPath );
-        Storage::disk( 'backup' )->deleteDirectory( 'tmp' . DIRECTORY_SEPARATOR . $this->folder );
-        $this->delete();          
+        Storage::disk('backup')->move($this->path, $newPath);
+        Storage::disk('backup')->deleteDirectory('tmp' . DIRECTORY_SEPARATOR . $this->folder);
+        $this->delete();
     }
 }

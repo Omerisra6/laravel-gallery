@@ -23,13 +23,12 @@ class Video implements Rule
      * @param  mixed  $value
      * @return bool
      */
-    public function passes( $attribute, $value )
+    public function passes($attribute, $value)
     {
         $videoMimeTypes = [ 'mp4','mov','ogg','qt' ];
         $fileMime       = $value->getClientMimeType();
 
-        if ( ! in_array( $fileMime, $videoMimeTypes ) ) 
-        {
+        if (! in_array($fileMime, $videoMimeTypes)) {
             return false;
         }
 

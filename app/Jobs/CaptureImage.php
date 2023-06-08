@@ -12,12 +12,15 @@ use Illuminate\Queue\SerializesModels;
 
 class CaptureImage implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+    use Dispatchable;
+    use InteractsWithQueue;
+    use Queueable;
+    use SerializesModels;
 
     private $videoPath;
     private $imagePath;
     /**
-     * 
+     *
      * Create a new job instance.
      *
      * @return void
@@ -35,13 +38,13 @@ class CaptureImage implements ShouldQueue
      * @return void
      */
     public function handle()
-    {        
+    {
         FFMpeg::fromDisk('backup')
             ->open($this->videoPath)
             ->getFrameFromSeconds(1)
             ->export()
             ->toDisk('backup')
             ->save($this->imagePath);
-         
+
     }
 }

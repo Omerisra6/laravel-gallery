@@ -14,11 +14,14 @@ use ProtoneMedia\LaravelFFMpeg\Support\FFMpeg;
 
 class ConvertVideoForStreaming implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+    use Dispatchable;
+    use InteractsWithQueue;
+    use Queueable;
+    use SerializesModels;
 
     private $oldPath;
     private $newPath;
-    
+
     /**
      * Create a new job instance.
      *
@@ -28,7 +31,7 @@ class ConvertVideoForStreaming implements ShouldQueue
     {
         $this->oldPath = $oldPath;
         $this->newPath = $newPath;
-       
+
     }
 
     /**
@@ -36,8 +39,8 @@ class ConvertVideoForStreaming implements ShouldQueue
      *
      * @return void
      */
-    public function handle( )
-    {   
+    public function handle()
+    {
 
         $midBitrate = (new X264('aac') )->setKiloBitrate(6000);
 
@@ -49,4 +52,3 @@ class ConvertVideoForStreaming implements ShouldQueue
 
     }
 }
-

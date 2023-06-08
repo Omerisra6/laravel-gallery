@@ -13,7 +13,7 @@ class video extends Component
      *
      * @return void
      */
-    public function __construct( $video )
+    public function __construct($video)
     {
         $this->video = $video;
     }

@@ -20,136 +20,132 @@ class VideoController extends Controller
 {
     /**
      * Create a new controller instance.
-     * 
+     *
      * @return void
     */
-    public function show( $id )
+    public function show($id)
     {
-        $video = Video::findOrFail( $id );
+        $video = Video::findOrFail($id);
         return view('showVideo')->with('video', $video);
     }
 
     /**
      * Create a new controller instance.
-     * 
+     *
      * @return void
     */
-    public function storeVideos( StoreVideoRequest $request )
+    public function storeVideos(StoreVideoRequest $request)
     {
         $request->validated();
-        $errors = collect( $request->videos )->mapWithKeys( function( $video, $index ) {
-        
-            if( $this->storeVideo( $video ) )
-            {
+        $errors = collect($request->videos)->mapWithKeys(function ($video, $index) {
+
+            if($this->storeVideo($video)) {
                 return [ $index => null ];
             }
-            
-            return  [  'videos.' . $index . '.video' => [ __( 'upload file again' ) ] ];
-        })
-        ->filter();   
 
-        if ( $errors->isNotEmpty() ) 
-        {
-            return response( [ 'errors' => $errors ], 400 );
+            return  [  'videos.' . $index . '.video' => [ __('upload file again') ] ];
+        })
+        ->filter();
+
+        if ($errors->isNotEmpty()) {
+            return response([ 'errors' => $errors ], 400);
         }
-        
-        return response( [ 'message' => __( 'All videos uploaded' ) ] , 200 );
+
+        return response([ 'message' => __('All videos uploaded') ], 200);
     }
 
     /**
      * Download original video
-     * 
+     *
      * @return void
     */
-    public function downloadOriginal( $id )
+    public function downloadOriginal($id)
     {
-        $video           = Video::findOrFail( $id );
+        $video           = Video::findOrFail($id);
         $path            = $video->original_video;
         $path            = explode('.', $path);
         $extension       = array_pop($path);
 
         $videoPublicName = $video->title.'-original'.'.'.$extension;
-        $videoPublicPath = public_path( 'videos/'.$video->original_video );
+        $videoPublicPath = public_path('videos/'.$video->original_video);
 
-        return response()->download( $videoPublicPath , $videoPublicName );
-    } 
+        return response()->download($videoPublicPath, $videoPublicName);
+    }
 
     /**
      * Download reduced video
-     * 
+     *
      * @return void
     */
-    public function downloadReduced( $id )
+    public function downloadReduced($id)
     {
-        $video           = Video::findOrFail( $id );
+        $video           = Video::findOrFail($id);
 
         $videoPublicName = $video->title.'-reduced.mp4';
-        $videpPublicPath = public_path( 'videos/'. $video->reduced_video );
+        $videpPublicPath = public_path('videos/'. $video->reduced_video);
 
-        return response()->download( $videpPublicPath , $videoPublicName );
+        return response()->download($videpPublicPath, $videoPublicName);
     }
 
     /**
      * Search video
-     * 
+     *
      * @return void
     */
-    public function search( $value )
+    public function search($value)
     {
         $videosPerPage = 9;
 
-        $videos = Video::where( 'key_words', 'like', '%'.$value.'%' )
-        ->orWhere( 'description', 'LIKE', '%'.$value.'%' )
-        ->orWhere( 'resolution', 'LIKE', '%'.$value.'%' )
-        ->orWhere( 'project_number', 'LIKE', '%'.$value.'%' )
-        ->orWhere( 'ratio', 'LIKE', '%'.$value.'%' )
-        ->orWhere( 'title', 'LIKE', '%'.$value.'%' )
-        ->orderBy( 'created_at' ,'DESC' )
+        $videos = Video::where('key_words', 'like', '%'.$value.'%')
+        ->orWhere('description', 'LIKE', '%'.$value.'%')
+        ->orWhere('resolution', 'LIKE', '%'.$value.'%')
+        ->orWhere('project_number', 'LIKE', '%'.$value.'%')
+        ->orWhere('ratio', 'LIKE', '%'.$value.'%')
+        ->orWhere('title', 'LIKE', '%'.$value.'%')
+        ->orderBy('created_at', 'DESC')
         ->latest()
-        ->paginate( $videosPerPage );
-            
-        return view('home')->with( 'videos', $videos );
+        ->paginate($videosPerPage);
+
+        return view('home')->with('videos', $videos);
     }
 
     /**
      * Import videos from google drive
-     * 
+     *
      * @return void
     */
-    public function importVideos( Request $request )
+    public function importVideos(Request $request)
     {
-        $file  = $request->file( 'file' );
+        $file  = $request->file('file');
         $idImport = new IdImport();
-        Excel::import( $idImport, $file );
+        Excel::import($idImport, $file);
         $ids = $idImport->ids;
-        
-        
-        $driveNames = DriveService::getFileNames( $ids );
+
+
+        $driveNames = DriveService::getFileNames($ids);
         $names      = $driveNames[ 'names' ];
         $errors     = $driveNames[ 'errors' ];
-        
-        Excel::import( new VideoImport( $names ), $file );
 
-        if( $errors->count() > 0 )
-        {
-            return response( $errors, 400 );
+        Excel::import(new VideoImport($names), $file);
+
+        if($errors->count() > 0) {
+            return response($errors, 400);
         }
 
-        return response( [ 'message' => 'All videos uploaded' ], 200 );
+        return response([ 'message' => 'All videos uploaded' ], 200);
     }
 
 
     /**
      * Store video in DB with all relevant attributes`
-     * 
+     *
      * @return void
     */
-    private function storeVideo( $video )
+    private function storeVideo($video)
     {
-        $tempFile = TempFile::where( 'folder', $video[ 'video' ] )->first();
+        $tempFile = TempFile::where('folder', $video[ 'video' ])->first();
 
-        if( ! $tempFile ) 
-        {
+        if(! $tempFile) {
             return false;
         }
 
@@ -159,25 +155,25 @@ class VideoController extends Controller
         $fileName   = $tempFile->filename;
         $tmpPath    = $tempFile->path;
 
-        $videoService = ServicesVideoService::make( $tmpPath );
+        $videoService = ServicesVideoService::make($tmpPath);
         $resolution   = $videoService->resolution;
         $duration     = $videoService->duration;
         $ratio        = $videoService->ratio;
-        $fileRatio    = str_replace( ':', 'X', $ratio );
+        $fileRatio    = str_replace(':', 'X', $ratio);
 
         $basePath         = '/videos/'. $madeFor . '/' . $projectNum . '/' . $fileRatio . '/';
         $originalFilePath = $basePath . $fileName;
-        $tempFile->moveAndDelete( $originalFilePath );        
+        $tempFile->moveAndDelete($originalFilePath);
 
 
-        $reducedFilePath = str_replace( 'original', 'reduced', $fileName );
-        $reducedFilePath = FileService::make()->replaceExtension( $reducedFilePath, 'mp4' );
+        $reducedFilePath = str_replace('original', 'reduced', $fileName);
+        $reducedFilePath = FileService::make()->replaceExtension($reducedFilePath, 'mp4');
         $reducedFilePath = $basePath . $reducedFilePath;
-            
-        ConvertVideoForStreaming::dispatch( $reducedFilePath, $originalFilePath );
-        
+
+        ConvertVideoForStreaming::dispatch($reducedFilePath, $originalFilePath);
+
         $imagePath = $basePath . now()->timestamp . '-FrameAt1sec.png';
-        CaptureImage::dispatch( $originalFilePath, $imagePath );
+        CaptureImage::dispatch($originalFilePath, $imagePath);
 
         Video::create([
             'description'    => $video['description'],

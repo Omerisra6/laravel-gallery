@@ -9,11 +9,11 @@ class Video extends Model
 {
     use HasFactory;
 
-     /**
-     * The attributes that are mass assignable.
-     *
-     * @var string[]
-     */
+    /**
+    * The attributes that are mass assignable.
+    *
+    * @var string[]
+    */
 
     protected $timeStamps = true;
 
@@ -22,7 +22,7 @@ class Video extends Model
     protected $fillable = [
         'title',
         'original_video',
-        'reduced_video',    
+        'reduced_video',
         'image_display',
         'duration',
         'made_for',
