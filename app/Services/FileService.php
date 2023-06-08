@@ -23,16 +23,16 @@ class FileService{
         {
             if ( $file->getFilename() == $fileName ) 
             {    
-                return $file->getPath().'\\'.$fileName;
+                return $file->getPath() . DIRECTORY_SEPARATOR . $fileName;
             }   
         }
     }
 
     public function getFolderPath( $path )
     {
-        $folderPath =  explode( '/', $path );
+        $folderPath =  explode(  DIRECTORY_SEPARATOR, $path );
         array_pop( $folderPath );
-        $folderPath = implode( '/', $folderPath );
+        $folderPath = implode(  DIRECTORY_SEPARATOR, $folderPath );
         return $folderPath;
     }
 }

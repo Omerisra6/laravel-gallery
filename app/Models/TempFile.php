@@ -14,13 +14,13 @@ class TempFile extends Model
 
     public function getPathAttribute()
     {
-        return 'tmp/'.$this->folder.'/'.$this->filename;
+        return 'tmp' . DIRECTORY_SEPARATOR . $this->folder .DIRECTORY_SEPARATOR . $this->filename;
     }
 
     public function moveAndDelete( $newPath )
     {
         Storage::disk( 'backup' )->move( $this->path, $newPath );
-        Storage::disk( 'backup' )->deleteDirectory( 'tmp/' . $this->folder );
+        Storage::disk( 'backup' )->deleteDirectory( 'tmp' . DIRECTORY_SEPARATOR . $this->folder );
         $this->delete();          
     }
 }

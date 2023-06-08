@@ -17,7 +17,7 @@ class TempFileController extends Controller
         $file     = $request->file('video');
         $fileName = now()->timestamp . '-original-' .$file->getClientOriginalName();
         $folder   = uniqid() . '-' . now()->timestamp;
-        $file->storeAs( 'tmp/' . $folder, $fileName, 'backup' );
+        $file->storeAs( 'tmp' . DIRECTORY_SEPARATOR . $folder, $fileName, 'backup' );
 
         TempFile::create([
             'folder' => $folder,
@@ -32,9 +32,9 @@ class TempFileController extends Controller
         $folder = $request->getContent();
         $temp = TempFile::where( 'folder', $folder )->first();
         
-        $videosPath         =  public_path( '\\videos' );
-        $tmpVideoFolderPath =  $videosPath. '\\tmp\\' .$folder;
-        unlink(  $tmpVideoFolderPath . '\\' . $temp->filename );
+        $videosPath         =  public_path(  DIRECTORY_SEPARATOR . 'videos' );
+        $tmpVideoFolderPath =  $videosPath.  DIRECTORY_SEPARATOR . 'tmp' . DIRECTORY_SEPARATOR .$folder;
+        unlink(  $tmpVideoFolderPath .  DIRECTORY_SEPARATOR . $temp->filename );
         rmdir(  $tmpVideoFolderPath );
 
         $temp->delete();
