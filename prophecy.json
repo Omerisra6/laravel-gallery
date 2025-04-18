@@ -1,0 +1,160 @@
+{
+  "$schema": "https://prophecy.ai/schemas/repo-config/v1.json",
+  "version": "1.0",
+  
+  "repository": {
+    "name": "laravel-gallery",
+    "description": "A Video Gallery App built with Laravel",
+    "defaultBranch": "master",
+    "primaryLanguage": "php",
+    "frameworks": ["laravel", "blade"]
+  },
+  
+  "structure": {
+    "sourceRoot": "app",
+    "testRoot": "tests",
+    "docsRoot": "docs",
+    "patterns": {
+      "controllers": "app/Http/Controllers/*.php",
+      "models": "app/Models/*.php",
+      "services": "app/Services/*.php",
+      "views": "resources/views/*.blade.php",
+      "routes": "routes/*.php",
+      "migrations": "database/migrations/*.php",
+      "jobs": "app/Jobs/*.php",
+      "imports": "app/Imports/*.php",
+      "middleware": "app/Http/Middleware/*.php",
+      "requests": "app/Http/Requests/*.php",
+      "tests": "tests/**/*.php"
+    }
+  },
+  
+  "conventions": {
+    "naming": {
+      "files": {
+        "pattern": "PascalCase",
+        "examples": ["VideoController.php", "VideoService.php"]
+      },
+      "classes": {
+        "pattern": "PascalCase",
+        "examples": ["VideoController", "VideoService"]
+      },
+      "methods": {
+        "pattern": "camelCase",
+        "examples": ["storeVideos", "getDuration"]
+      },
+      "variables": {
+        "pattern": "camelCase",
+        "examples": ["videoPublicName", "fileRatio"]
+      },
+      "routes": {
+        "pattern": "snake_case",
+        "examples": ["search_video", "store_video"]
+      }
+    },
+    "codeStyle": {
+      "indentation": {
+        "style": "spaces",
+        "size": 4
+      },
+      "quotes": "single",
+      "semicolons": true,
+      "bracketStyle": "sameLine"
+    }
+  },
+  
+  "architecture": {
+    "pattern": "MVC",
+    "layerOrder": ["controllers", "services", "models"],
+    "dataFlow": "Controllers handle requests, call services for business logic, and services interact with models",
+    "dependencyInjection": {
+      "type": "constructor",
+      "example": "public function __construct($path, $disk) { $this->video = FFMpeg::fromDisk($disk)->open($path); }"
+    }
+  },
+  
+  "features": {
+    "videoProcessing": {
+      "description": "Processes and converts video files for streaming",
+      "components": ["FFMpeg", "VideoService", "ConvertVideoForStreaming"]
+    },
+    "googleDriveIntegration": {
+      "description": "Synchronizes files from Google Drive",
+      "components": ["DriveService", "GoogleApiClient"]
+    },
+    "largeFileUploads": {
+      "description": "Handles large video file uploads",
+      "components": ["FileService", "TempFile"]
+    },
+    "videoMetadata": {
+      "description": "Extracts and displays video metadata (resolution, ratio, duration)",
+      "components": ["VideoService"]
+    }
+  },
+  
+  "testing": {
+    "framework": "phpunit",
+    "conventions": {
+      "unitTests": {
+        "namingPattern": "Test.php",
+        "location": "tests/Unit/"
+      },
+      "featureTests": {
+        "namingPattern": "Test.php",
+        "location": "tests/Feature/"
+      }
+    }
+  },
+  
+  "documentation": {
+    "codeComments": {
+      "style": "PHPDoc",
+      "required": ["public methods", "controllers"]
+    }
+  },
+  
+  "errorHandling": {
+    "pattern": "exception-based",
+    "exampleCode": "if(!$tempFile) { return false; }"
+  },
+  
+  "designDocuments": [],
+  
+  "customPatterns": [
+    {
+      "name": "Video Processing Pattern",
+      "description": "Videos are processed in multiple steps: upload, conversion, and image extraction",
+      "example": "TempFile->moveAndDelete($originalFilePath);\nConvertVideoForStreaming::dispatch($reducedFilePath, $originalFilePath);\nCaptureImage::dispatch($originalFilePath, $imagePath);"
+    },
+    {
+      "name": "Blade View Structure",
+      "description": "Views are organized with @section directives for content, styles, and scripts",
+      "example": "@extends('layouts.app')\n@section('styles')\n    <!-- CSS files -->\n@endsection\n@section('content')\n    <!-- Main content -->\n@endsection\n@section('scripts')\n    <!-- JS files -->\n@endsection"
+    }
+  ],
+  
+  "dependencies": {
+    "key": [
+      "laravel/framework",
+      "pbmedia/laravel-ffmpeg",
+      "php-ffmpeg/php-ffmpeg",
+      "google/apiclient",
+      "naotpon/flysystem-google-drive"
+    ],
+    "devDependencies": [
+      "barryvdh/laravel-debugbar",
+      "phpunit/phpunit",
+      "laravel/sail"
+    ]
+  },
+  
+  "deployment": {
+    "docker": {
+      "enabled": true,
+      "files": ["Dockerfile", "docker-compose.yml"]
+    },
+    "server": {
+      "requirements": ["ffmpeg", "php>=7.3"]
+    }
+  }
+}
