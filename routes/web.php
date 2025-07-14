@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\VideoController;
+use App\Http\Controllers\VideoCarouselController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,3 +29,6 @@ Route::get( '/display/{id}', [ VideoController::class, 'show' ] )->name( 'displa
 Route::post( '/video', [ VideoController::class, 'storeVideos' ] )->name( 'store_video' );
 
 Route::post( '/import', [ VideoController::class, 'importVideos' ] )->name( 'import_videos' );
+
+// Video Carousel Route
+Route::get('/video-carousel', [VideoCarouselController::class, 'index'])->name('video_carousel');
